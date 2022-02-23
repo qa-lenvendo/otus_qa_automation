@@ -1,5 +1,6 @@
 import pytest
 from fixture.ui import UserInterface
+from fixture.test_data import TestData
 
 
 @pytest.fixture(scope='function')
@@ -13,6 +14,13 @@ def ui(request):
     yield ui
 
     ui.close()
+
+
+@pytest.fixture(scope="function")
+def test_data(request):
+    test_data = TestData()
+
+    yield test_data
 
 
 def pytest_addoption(parser):
