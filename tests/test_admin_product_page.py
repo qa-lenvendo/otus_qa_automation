@@ -1,4 +1,5 @@
 from datetime import datetime
+from random import choice
 
 
 class TestAdminProductPage:
@@ -30,3 +31,17 @@ class TestAdminProductPage:
 
         ui.admin_product_list_page.should_be_open()
         ui.admin_product_list_page.should_be_product_name(product_name=product_name)
+
+    def test_delete_product(self, ui):
+        ui.admin_login_page.open()
+        ui.admin_login_page.login_user(user_name='user', user_password='bitnami')
+        ui.admin_main_page.should_be_login_user('John Doe')
+
+        ui.admin_main_page.click_catalog_menu()
+        ui.admin_main_page.click_catalog_submenu('Products')
+
+        ui.admin_product_list_page.should_be_open()
+        product = choice(ui.admin_product_list_page.get_product_name_list())
+        ui.admin_product_list_page.select_product(product_name=product)
+        ui.admin_product_list_page.click_delete_button()
+        ui.admin_product_list_page.should_not_be_product_name(product_name=product)

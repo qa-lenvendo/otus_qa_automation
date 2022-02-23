@@ -21,6 +21,14 @@ class BasePage:
             return False
         return True
 
+    def _is_not_element_present(self, strategy, locator, timeout=_timeout):
+        try:
+            WebDriverWait(self.driver, timeout).until_not(
+                expected_conditions.presence_of_element_located((strategy, locator)))
+        except TimeoutException:
+            return False
+        return True
+
     def _find_element_clickable(self, strategy, locator, timeout=_timeout):
         return WebDriverWait(self.driver, timeout).until(
             expected_conditions.element_to_be_clickable((strategy, locator)),
@@ -38,3 +46,7 @@ class BasePage:
 
     def get_current_url(self):
         return self.driver.current_url
+
+    def _alert_accept(self):
+        alert = self.driver.switch_to.alert
+        alert.accept()
