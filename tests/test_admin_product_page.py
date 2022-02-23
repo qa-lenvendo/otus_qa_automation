@@ -1,0 +1,2 @@
+class TestAdminProductPage:
+    pass
