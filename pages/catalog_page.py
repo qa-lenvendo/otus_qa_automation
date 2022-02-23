@@ -8,7 +8,7 @@ class CatalogPage(BasePage):
     """
 
     def open(self, path):
-        self.open_page(path)
+        self._open_page(path)
 
     def should_be_product_card(self):
         assert self._is_element_present(*Locators.PRODUCT_CARD), 'element "Product Card" is not present'

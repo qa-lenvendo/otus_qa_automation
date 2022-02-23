@@ -9,7 +9,7 @@ class AdminLoginPage(BasePage):
     _path = '/admin'
 
     def open(self):
-        self.open_page(self._path)
+        self._open_page(self._path)
 
     def should_be_logo(self):
         assert self._is_element_present(*Locators.HEADER_LOGO), 'element "Logo" is not present'

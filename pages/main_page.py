@@ -8,7 +8,7 @@ class MainPage(BasePage):
     """
 
     def open(self):
-        self.open_page()
+        self._open_page()
 
     def should_be_search_input(self):
         assert self._is_element_present(*Locators.SEARCH_INPUT), 'element "Search Input" is not present'

@@ -8,7 +8,7 @@ class ProductPage(BasePage):
     """
 
     def open(self, path):
-        self.open_page(path)
+        self._open_page(path)
 
     def should_be_add_cart_button(self):
         assert self._is_element_present(*Locators.ADD_CART_BUTTON), 'element "Cart Button" is not present'

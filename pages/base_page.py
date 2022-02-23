@@ -10,7 +10,7 @@ class BasePage:
         self.driver = ui.driver
         self.base_url = ui.base_url
 
-    def open_page(self, path=''):
+    def _open_page(self, path=''):
         self.driver.get(self.base_url + f'/{path}')
 
     def _is_element_present(self, strategy, locator, timeout=_timeout):

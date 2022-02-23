@@ -9,7 +9,7 @@ class RegistrationPage(BasePage):
     _path = '/index.php?route=account/register'
 
     def open(self):
-        self.open_page(self._path)
+        self._open_page(self._path)
 
     def should_be_firstname_input(self):
         assert self._is_element_present(*Locators.FIRSTNAME_INPUT), 'element "Firstname Input" is not present'
