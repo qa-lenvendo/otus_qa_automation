@@ -25,3 +25,12 @@ class AdminLoginPage(BasePage):
 
     def should_be_footer(self):
         assert self._is_element_present(*Locators.FOOTER), 'element "Footer" is not present'
+
+    def login_user(self, user_name, user_password):
+        login_input = self._find_element(*Locators.USER_NAME_INPUT)
+        password_input = self._find_element(*Locators.PASSWORD_INPUT)
+        login_button = self._find_element_clickable(*Locators.LOGIN_BUTTON)
+
+        login_input.send_keys(user_name)
+        password_input.send_keys(user_password)
+        login_button.click()

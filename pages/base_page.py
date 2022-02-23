@@ -35,3 +35,6 @@ class BasePage:
         return WebDriverWait(self.driver, timeout).until(
             expected_conditions.presence_of_all_elements_located((strategy, locator)),
             message=f"Не найден элемент с локатором: {(strategy, locator)}")
+
+    def get_current_url(self):
+        return self.driver.current_url
