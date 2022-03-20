@@ -1,4 +1,4 @@
-from allure import step
+from utils.steps import step
 from .base_page import BasePage
 from locators.admin_product_page_locators import AdminProductPageLocators as Locators
 
