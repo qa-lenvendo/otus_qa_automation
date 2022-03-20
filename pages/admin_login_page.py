@@ -1,4 +1,4 @@
-from utils.steps import step
+from utils.steps import step, attach
 from .base_page import BasePage
 from locators.admin_login_page_locators import AdminLoginPageLocators as Locators
 

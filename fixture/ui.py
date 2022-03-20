@@ -13,7 +13,7 @@ from pages.admin_product_list_page import AdminProductListPage
 
 
 class UserInterface:
-    def __init__(self, base_url, browser_name, headless):
+    def __init__(self, base_url, browser_name, headless, test_name, log_level):
 
         self._window_width = 1920
         self._window_height = 1080
@@ -50,6 +50,9 @@ class UserInterface:
         self.driver.set_window_size(self._window_width, self._window_height)
 
         self.base_url = base_url
+        self.test_name = test_name
+        self.log_level = log_level
+
         self.main_page = MainPage(self)
         self.catalog_page = CatalogPage(self)
         self.product_page = ProductPage(self)
