@@ -13,40 +13,54 @@ from pages.admin_product_list_page import AdminProductListPage
 
 
 class UserInterface:
-    def __init__(self, base_url, browser_name, headless, test_name, log_level):
+    def __init__(self, base_url, browser_name, headless, test_name, log_level, mode, hub, port):
 
         self._window_width = 1920
         self._window_height = 1080
 
-        if browser_name == 'chrome':
-            options = webdriver.ChromeOptions()
-            if headless == 'true':
-                options.add_argument('--headless')
-            self.driver = webdriver.Chrome(
-                executable_path=ChromeDriverManager().install(),
-                options=options,
-                desired_capabilities=options.to_capabilities()
+        if mode == 'remote':
+            if browser_name == 'chrome':
+                options = webdriver.ChromeOptions()
+            elif browser_name == 'firefox':
+                options = webdriver.FirefoxOptions()
+            else:
+                raise AssertionError(f'Unknown browser: {browser_name}')
+
+            self.driver = webdriver.Remote(
+                command_executor='http://' + hub + ':' + port + '/wd/hub',
+                desired_capabilities=options.to_capabilities(),
+                options=options
             )
-        elif browser_name == 'firefox':
-            options = webdriver.FirefoxOptions()
-            if headless == 'true':
-                options.add_argument('--headless')
-            self.driver = webdriver.Firefox(
-                executable_path=GeckoDriverManager().install(),
-                options=options,
-                desired_capabilities=options.to_capabilities()
-            )
-        elif browser_name == 'opera':
-            options = webdriver.ChromeOptions()
-            if headless == 'true':
-                options.add_argument('--headless')
-            self.driver = webdriver.Opera(
-                executable_path=OperaDriverManager().install(),
-                options=options,
-                desired_capabilities=options.to_capabilities()
-            )
-        else:
-            raise AssertionError(f'Unknown browser: {browser_name}')
+        if mode == 'local':
+            if browser_name == 'chrome':
+                options = webdriver.ChromeOptions()
+                if headless == 'true':
+                    options.add_argument('--headless')
+                self.driver = webdriver.Chrome(
+                    executable_path=ChromeDriverManager().install(),
+                    options=options,
+                    desired_capabilities=options.to_capabilities()
+                )
+            elif browser_name == 'firefox':
+                options = webdriver.FirefoxOptions()
+                if headless == 'true':
+                    options.add_argument('--headless')
+                self.driver = webdriver.Firefox(
+                    executable_path=GeckoDriverManager().install(),
+                    options=options,
+                    desired_capabilities=options.to_capabilities()
+                )
+            elif browser_name == 'opera':
+                options = webdriver.ChromeOptions()
+                if headless == 'true':
+                    options.add_argument('--headless')
+                self.driver = webdriver.Opera(
+                    executable_path=OperaDriverManager().install(),
+                    options=options,
+                    desired_capabilities=options.to_capabilities()
+                )
+            else:
+                raise AssertionError(f'Unknown browser: {browser_name}')
         self.driver.set_window_size(self._window_width, self._window_height)
 
         self.base_url = base_url
