@@ -1,3 +1,4 @@
+import os
 import pytest
 from fixture.ui import UserInterface
 from fixture.test_data import TestData
@@ -31,10 +32,16 @@ def test_data(request):
     yield test_data
 
 
+@pytest.fixture(scope='session', autouse=True)
+def is_log_exist():
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+
+
 def pytest_addoption(parser):
     parser.addoption('--base_url', action='store', default='http://192.168.3.107:8081', help='stage url')
     parser.addoption('--browser_name', action='store', default='chrome', help='choose browser')
-    parser.addoption('--headless', action='store', default='true', help='choose browser')
+    parser.addoption('--headless', action='store', default='false', help='choose browser')
     parser.addoption("--log_level", action="store", default="DEBUG")
     parser.addoption('--mode', action='store', default='local', help='Choose local or remote mode')
     parser.addoption('--hub', action='store', default='192.168.3.107', help='Choose hub host')
