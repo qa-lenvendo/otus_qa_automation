@@ -1,12 +1,15 @@
+from allure import epic, title
 from datetime import datetime
 from random import choice
 
 
+@epic('Страница карточки товара')
 class TestAdminProductPage:
     """
     Tests for admin product page
     """
 
+    @title('Добавление новой карточки товара')
     def test_add_new_product(self, ui):
         product_name = f'Product_{str(datetime.now().__format__("%Y%m%d%H%M%S"))}'
         meta_tag = f'MetaTag_{str(datetime.now().__format__("%Y%m%d%H%M%S"))}'
@@ -32,6 +35,7 @@ class TestAdminProductPage:
         ui.admin_product_list_page.should_be_open()
         ui.admin_product_list_page.should_be_product_name(product_name=product_name)
 
+    @title('Удаление товара из каталога')
     def test_delete_product(self, ui):
         ui.admin_login_page.open()
         ui.admin_login_page.login_user(user_name='user', user_password='bitnami')
