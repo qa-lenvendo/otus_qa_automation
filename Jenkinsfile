@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Tests') {
             steps {
-                cathError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh """docker run --name test_run --network selenoid otus_tests --mode=remote --base_url=${BASE_URL} --browser_name=${BROWSER} --hub=${EXECUTOR_HUB} --hub_port=${EXECUTOR_PORT} && docker cp test_run:/app/allure-results ."""
                 }
             }
