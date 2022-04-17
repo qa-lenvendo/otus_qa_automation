@@ -16,7 +16,7 @@ pipeline {
         stage('Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh """docker run --name test_run --network selenoid otus_tests --mode=remote --base_url=${BASE_URL} --browser_name=${BROWSER} --hub=${EXECUTOR_HUB} --hub_port=${EXECUTOR_PORT}"""
+                    sh """docker run --name test_run --network selenoid otus_tests --mode=remote --base_url=${BASE_URL} --browser_name=${BROWSER} --hub=${EXECUTOR_HUB} --hub_port=${EXECUTOR_PORT} -n ${STREAM_NUM}"""
                 }
             }
         }

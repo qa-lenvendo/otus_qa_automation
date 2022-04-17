@@ -3,3 +3,4 @@ selenium==4.1.0
 webdriver-manager==3.5.3
 Faker==13.2.0
 allure-pytest==2.9.45
+pytest-xdist~=2.5.0
