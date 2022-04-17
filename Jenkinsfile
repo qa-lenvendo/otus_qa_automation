@@ -24,6 +24,7 @@ pipeline {
             steps {
                 sh 'docker cp test_run:/app/allure-results .'
             }
+        }
         stage('Allure Report') {
             steps {
                 allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
