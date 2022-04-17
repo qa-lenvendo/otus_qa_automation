@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     stages{
-        stage('Git') {
+        stage('PreBuild') {
             steps {
-                echo "${BASE_URL}"
                 git branch: 'jenkins', url: 'https://github.com/qa-lenvendo/otus_qa_automation.git'
+                sh 'mkdir -p allure-results'
             }
         }
         stage('Docker Build') {
