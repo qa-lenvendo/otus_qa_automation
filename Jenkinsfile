@@ -5,7 +5,7 @@ pipeline {
         stage('Git') {
             steps {
                 echo "${BASE_URL}"
-                git branch: 'docker_test', url: 'https://github.com/qa-lenvendo/otus_qa_automation.git'
+                git branch: 'jenkins', url: 'https://github.com/qa-lenvendo/otus_qa_automation.git'
             }
         }
         stage('Docker Build') {
